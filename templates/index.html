@@ -1,0 +1,16 @@
+
+<ul>
+{% for groupname, group in groups.items() %}
+<li><b>{{ groupname }}</b>
+<ul>
+{% for playlist in group %}
+{% if playlist['tvg-id'] and playlist['tvg-name'] %}
+<li>
+   {{ playlist['tvg-name'] }} <a href="{{ playlist['m3u8'] }}">(M3U8)</a> <a href="{{ playlist['m3u8_player'] }}">(Player)</a>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+</li>
+{% endfor %}
+</ul>
