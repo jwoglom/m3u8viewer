@@ -1,3 +1,4 @@
+<input style="width: 400px" onkeyup="filter(this.value)" onchange="filter(this.value)" value="" placeholder="Filter" />
 
 <ul>
 {% for groupname, group in groups.items() %}
@@ -5,8 +6,8 @@
 <ul>
 {% for playlist in group %}
 {% if playlist['tvg-id'] and playlist['tvg-name'] %}
-<li>
-   {{ playlist['tvg-name'] }} <a href="{{ playlist['m3u8'] }}">(M3U8)</a> <a href="{{ playlist['m3u8_player'] }}">(Player)</a>
+<li class="playlist" data-name="{{ playlist['tvg-name'] }}">
+   {{ playlist['tvg-name'] }} &nbsp; <a href="{{ playlist['m3u8'] }}">(M3U8)</a> <a href="{{ playlist['m3u8_player'] }}">(Player)</a>
 </li>
 {% endif %}
 {% endfor %}
@@ -14,3 +15,18 @@
 </li>
 {% endfor %}
 </ul>
+
+<script>
+    function filter(v) {
+        document.querySelectorAll('.playlist').forEach(item => {
+            if (!v) {
+                item.style.display = '';
+            } else if (item.getAttribute('data-name').toLowerCase().indexOf(v.toLowerCase()) == -1) {
+                item.style.display = 'none';
+            } else {
+                item.style.display = '';
+            }
+        });
+    }
+    window.onload = function() {document.querySelector('input').focus()}
+</script>
