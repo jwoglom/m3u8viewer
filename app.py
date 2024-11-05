@@ -111,7 +111,7 @@ def build_m3u8_url(met):
     if 'http-user-agent' in met:
         data.append('User-Agent=' + met.get('http-user-agent'))
     
-    return urljoin(PROXY_BASE, '/playlist?' + urlencode({
+    return urljoin(PROXY_BASE, '/playlist.m3u8?' + urlencode({
         'url': met['raw_url'],
         'data': base64.b64encode('|'.join(data).encode()).decode()
     }))
